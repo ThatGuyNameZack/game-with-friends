@@ -34,7 +34,7 @@ void doCombat(struct Player *player, struct Enemy *enemy) {
     {
         printf("\n1.Attack\n");
         printf("2.Skill\n");
-        printf("3.Skill Check\n");
+        printf("3.Enemy Check\n");
         printf("4.NIGERUNDAYO!!!\n");
         int combatChoices;
         scanf("%d", &combatChoices);
