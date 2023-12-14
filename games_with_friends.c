@@ -20,14 +20,16 @@ struct Enemy {
     int attack;
 };
 
-// Function to perform combat
+
+
+void displayEnemyStats(struct Enemy *enemy) {
+    printf("\nEnemy Name: %s\n", enemy->name);
+    printf("Enemy Health: %d\n", enemy->health);
+    printf("Enemy Attack: %d\n", enemy->attack);
+}
+
 void doCombat(struct Player *player, struct Enemy *enemy) {
-    // Combat logic goes here
-    // Compare player's attack and enemy's defense, deduct health accordingly
-
     int combat = 1; 
-
-
     while(combat)
     {
         printf("\n1.Attack\n");
@@ -35,7 +37,7 @@ void doCombat(struct Player *player, struct Enemy *enemy) {
         printf("3.Skill Check\n");
         printf("4.NIGERUNDAYO!!!\n");
         int combatChoices;
-        scanf("%d", combatChoices);
+        scanf("%d", &combatChoices);
 
 
             switch(combatChoices)
@@ -52,24 +54,34 @@ void doCombat(struct Player *player, struct Enemy *enemy) {
                 scanf("%d", &skills);
                    
                     switch(skills)
-                    {
-                        case 1:
-                        printf("You cast Fire Attack!\n");
-                        printf("It hitted %s!\n", enemy-> name);
+                   {
+                    case 2:
+                        if (player->mana >= 15) {
+                            printf("You cast World Slash\n");
+                            printf("It hit %s\n", enemy->name);
+                            // Reduce mana when World Slash is used
+                         player->mana -= 15;
+                        } else {
+                            printf("Not enough mana to cast World Slash!\n");
+                        }
                         break;
-
-                        case 2:
-                        printf("You cast World Slash\n");
-                        printf("It hitted %s\n", enemy-> name);
-                        break;
-                    }
-
-
+                   }
+                case 3:
+                    displayEnemyStats(enemy);
+                    break;
+                case 4:
+                    printf("you try to ran away...");
+                //gave it a 30% chance to escape
+                if (rand() % 100 < 30) {
+                    printf("You successfully ran away!\n");
+                    combat = 0; // Exit combat loop
+                } else {
+                    printf("CRAP, HE WONT LET YOU GET AWAY!\n");
+                    // Continue the combat loop
+                }
+                break;
             }
-
-
-
-
+           
 
 
 
@@ -103,26 +115,33 @@ int main() {
                         case 0:
                             // Set stats for enemy type 1
                             enemy = (struct Enemy){"Goblin", 50, 15};
+                            printf("this might be easy");
                             break;
                         case 1:
                             // Set stats for enemy type 2
                             enemy = (struct Enemy){"Dragon", 250, 75};
+                            printf("this might be dangerous");
                             break;
                         case 2:
                             // Set stats for enemy type 3
                             enemy = (struct Enemy){"Skeleton", 30, 25};
+                            printf("pretty spooky huh");
                             break;
                         case 3: 
                             enemy = (struct Enemy){"Skeleton King", 100, 50};
+                            printf("kind of troubling this one");
                             break;
                         case 4:
                             enemy = (struct Enemy){"Elder God", 999, 999};
+                            printf("it seems we have already lost...");
                             break;
                         case 5:
                             enemy = (struct Enemy){"Slime", 10, 5};
+                            printf("pretty cute for being an enemy");
                             break;
                         case 6:
                             enemy = (struct Enemy){"Baby Dragon", 125, 32};
+                            printf("we could probably handle this one");
                             break;
                     }
                     printf("You encountered a %s!\n", enemy.name);
