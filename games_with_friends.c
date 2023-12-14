@@ -3,6 +3,6 @@
 int main()
 {
     printf("hello nigga");
-
+    printf("aku jawa\n");
     return 0;
 }
