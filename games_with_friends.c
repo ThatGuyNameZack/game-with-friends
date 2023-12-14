@@ -6,8 +6,11 @@
 struct Player {
     char name[50];
     int health;
+    int mana;
     int attack;
     int defense;
+    int slash;
+    int magic;
 };
 
 // Enemy structure
@@ -21,12 +24,63 @@ struct Enemy {
 void doCombat(struct Player *player, struct Enemy *enemy) {
     // Combat logic goes here
     // Compare player's attack and enemy's defense, deduct health accordingly
+
+    int combat = 1; 
+
+
+    while(combat)
+    {
+        printf("\n1.Attack\n");
+        printf("2.Skill\n");
+        printf("3.Skill Check\n");
+        printf("4.NIGERUNDAYO!!!\n");
+        int combatChoices;
+        scanf("%d", combatChoices);
+
+
+            switch(combatChoices)
+            {
+                case 1:
+                printf("You attacked %s!\n", enemy-> name);
+                break;
+
+                case 2:
+                printf("\nHere are your skills\n");
+                printf("1. Fire Attack\n");
+                printf("2. World Slash\n");
+                 int skills;
+                scanf("%d", &skills);
+                   
+                    switch(skills)
+                    {
+                        case 1:
+                        printf("You cast Fire Attack!\n");
+                        printf("It hitted %s!\n", enemy-> name);
+                        break;
+
+                        case 2:
+                        printf("You cast World Slash\n");
+                        printf("It hitted %s\n", enemy-> name);
+                        break;
+                    }
+
+
+            }
+
+
+
+
+
+
+
+
+    }
 }
 
 int main() {
     srand(time(0)); // Seed for randomization
 
-    struct Player player = {"Player", 100, 20, 10}; // Set player stats
+    struct Player player = {"Player", 100, 50, 20, 10, 40, 45}; // Set player stats
     struct Enemy enemy;
 
     printf("Welcome to the game!\n");
@@ -37,6 +91,7 @@ int main() {
         printf("2. View Character Stats\n");
         printf("3. Quit\n");
         printf("Enter your choice: ");
+        int choice;
         scanf("%d", &choice);
 
         switch (choice) {
@@ -78,6 +133,7 @@ int main() {
                 // Display player stats
                 printf("Name: %s\n", player.name);
                 printf("Health: %d\n", player.health);
+                printf("Mana: %d\n", player.mana);
                 printf("Attack: %d\n", player.attack);
                 printf("Defense: %d\n", player.defense);
                 break;
