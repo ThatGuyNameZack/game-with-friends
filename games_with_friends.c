@@ -27,9 +27,9 @@ int main() {
     srand(time(0)); // Seed for randomization
 
     struct Player player = {"Player", 100, 20, 10}; // Set player stats
-    struct Enemy enemy = {"Goblin", 50, 15}; // Set enemy stats
+    struct Enemy enemy;
 
-    printf("Welcome to Text-Based RPG!\n");
+    printf("Welcome to the game!\n");
 
     int choice;
     do {
@@ -41,11 +41,39 @@ int main() {
 
         switch (choice) {
             case 1:
-                // Simulate exploration or encounters
-                // For example:
-                printf("You encountered a %s!\n", enemy.name);
-                doCombat(&player, &enemy); // Start combat
-                break;
+                {
+                    int randEnemy = rand() % 6; // Change 3 to the number of different enemies you have
+
+                    switch (randEnemy) {
+                        case 0:
+                            // Set stats for enemy type 1
+                            enemy = (struct Enemy){"Goblin", 50, 15};
+                            break;
+                        case 1:
+                            // Set stats for enemy type 2
+                            enemy = (struct Enemy){"Dragon", 250, 75};
+                            break;
+                        case 2:
+                            // Set stats for enemy type 3
+                            enemy = (struct Enemy){"Skeleton", 30, 25};
+                            break;
+                        case 3: 
+                            enemy = (struct Enemy){"Skeleton King", 100, 50};
+                            break;
+                        case 4:
+                            enemy = (struct Enemy){"Elder God", 999, 999};
+                            break;
+                        case 5:
+                            enemy = (struct Enemy){"Slime", 10, 5};
+                            break;
+                        case 6:
+                            enemy = (struct Enemy){"Baby Dragon", 125, 32};
+                            break;
+                    }
+                    printf("You encountered a %s!\n", enemy.name);
+                    doCombat(&player, &enemy); // Start combat
+                    break;
+                }
             case 2:
                 // Display player stats
                 printf("Name: %s\n", player.name);
