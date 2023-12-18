@@ -48,13 +48,26 @@ void doCombat(struct Player *player, struct Enemy *enemy) {
 
                 case 2:
                 printf("\nHere are your skills\n");
-                printf("1. Fire Attack\n");
+                printf("1. Fireball\n");
                 printf("2. World Slash\n");
                  int skills;
                 scanf("%d", &skills);
                    
                     switch(skills)
                    {
+                    
+                    case 1:
+                        if (player->mana >= 25) {
+                            printf("You case Fireball\n");
+                            printf("it hit %s\n", enemy -> name);
+
+                        player->mana -= 15;
+                        } else {
+                            printf("Not enough mana to cast Fireball\n");
+                        }
+                        break;
+
+                    
                     case 2:
                         if (player->mana >= 15) {
                             printf("You cast World Slash\n");
