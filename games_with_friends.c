@@ -11,6 +11,7 @@ struct Player {
     int defense;
     int slash;
     int magic;
+    int luck;
 };
 
 // Enemy structure
@@ -20,7 +21,22 @@ struct Enemy {
     int attack;
 };
 
+void enemyAttack(struct Player *player, struct Enemy *enemy) {
+    int luck = player->luck; // Assuming the Player struct has a 'luck' attribute
+    int randomNum = rand() % 100; // Generate a random number between 0 and 99
 
+    if (randomNum < luck) {
+        int damage = enemy->attack - player->defense;
+        if (damage > 0) {
+            player->health -= damage;
+            printf("%s attacked you and dealt %d damage!\n", enemy->name, damage);
+        } else {
+            printf("%s attacked you, but you blocked the attack!\n", enemy->name);
+        }
+    } else {
+        printf("%s tried to attack you, but missed!\n", enemy->name);
+    }
+}
 
 void displayEnemyStats(struct Enemy *enemy) {
     printf("\nEnemy Name: %s\n", enemy->name);
@@ -28,8 +44,16 @@ void displayEnemyStats(struct Enemy *enemy) {
     printf("Enemy Attack: %d\n", enemy->attack);
 }
 
+
 void doCombat(struct Player *player, struct Enemy *enemy) {
+    
+    player->mana = 65;
+    player->health = 150;
+    
     int combat = 1; 
+    
+    
+    
     while(combat)
     {
         printf("\n1.Attack\n");
@@ -114,18 +138,30 @@ void doCombat(struct Player *player, struct Enemy *enemy) {
                 }
                 break;
             }
-           
+
+           if (enemy->health > 0) {
+            enemyAttack(player, enemy);
+
+            if (player->health <= 0) {
+                printf("You have been utterly defeated by %s. Take this L with you!\n", enemy->name);
+                combat = 0; // End the loop because the player lost
+            }
+        } else {
+            printf("You defeated %s\n", enemy->name);
+            combat = 0; // End the loop because the enemy is defeated
+        }
+    }
 
 
 
 
     }
-}
+
 
 int main() {
     srand(time(0)); // Seed for randomization
 
-    struct Player player = {"Player", 100, 50, 20, 10, 40, 45}; // Set player stats
+    struct Player player = {"Player", 150, 65, 30, 50, 40, 45, 25}; // Set player stats
     struct Enemy enemy;
 
     printf("Welcome to the game!\n");
@@ -148,7 +184,7 @@ int main() {
                         case 0:
                             // Set stats for enemy type 1
                             enemy = (struct Enemy){"Goblin", 50, 15};
-                            printf("this might be easy");
+                            printf("this might be easy\n");
                             break;
                         case 1:
                             // Set stats for enemy type 2
@@ -161,7 +197,7 @@ int main() {
                             printf("pretty spooky huh\n");
                             break;
                         case 3: 
-                            enemy = (struct Enemy){"Skeleton King", 100, 50};
+                            enemy = (struct Enemy){"Skeleton King", 100, 65};
                             printf("kind of troubling this one\n");
                             break;
                         case 4:
