@@ -35,9 +35,9 @@ void delayPrint(const char *text) {
 
 void enemyAttack(struct Player *player, struct Enemy *enemy) {
     int luck = player->luck;
-    int randomNum = rand() % 100;
+    int randomNum = rand() % 100; 
 
-    if (randomNum < luck) {
+    if (randomNum < (luck / 2)) { 
         int damage = enemy->attack - player->defense;
         if (damage > 0) {
             player->health -= damage;
@@ -49,6 +49,8 @@ void enemyAttack(struct Player *player, struct Enemy *enemy) {
         printf("%s tried to attack you, but missed!\n", enemy->name);
     }
 }
+
+
 
 void displayEnemyStats(struct Enemy *enemy) {
     printf("\nEnemy Name: %s\n", enemy->name);
@@ -184,7 +186,7 @@ void doCombat(struct Player *player, struct Enemy *enemy) {
 int main() {
     srand(time(0));
 
-    struct Player player = {"Player", 150, 65, 30, 50, 40, 45, 15};
+    struct Player player = {"Player", 150, 65, 30, 50, 40, 45, 10};
     struct Enemy enemy;
 
     printf("Welcome to the game!\n");
