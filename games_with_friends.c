@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 struct Player {
-    char name[50];
+    char name[50]; //int player, structure of the player
     int health;
     int mana;
     int attack;
@@ -14,13 +14,13 @@ struct Player {
     int luck;
 };
 
-struct Enemy {
-    char name[50];
+struct Enemy { 
+    char name[50];//structure of the enemy
     int health;
     int attack;
 };
 
-void delayPrint(const char *text) {
+void delayPrint(const char *text) { //added for dramatic effects
     while (*text != '\0') {
         putchar(*text);
         fflush(stdout);
@@ -37,7 +37,7 @@ void enemyAttack(struct Player *player, struct Enemy *enemy) {
     int luck = player->luck;
     int randomNum = rand() % 100; 
 
-    if (randomNum < (luck / 2)) { 
+    if (randomNum < (luck * 0.5)) {  //rng system for enemy
         int damage = enemy->attack - player->defense;
         if (damage > 0) {
             player->health -= damage;
@@ -99,8 +99,8 @@ void doCombat(struct Player *player, struct Enemy *enemy) {
 
             case 2:
                 printf("\nHere are your skills\n");
-                printf("1. Fireball\n");
-                printf("2. World Slash\n");
+                printf("1. Fireball(25 mana)\n");
+                printf("2. World Slash (15 mana)\n");
                 int skills;
                 scanf("%d", &skills);
 
@@ -121,11 +121,11 @@ void doCombat(struct Player *player, struct Enemy *enemy) {
                         break;
 
                     case 2:
-                        if (player->mana >= 15) {
+                        if (player->mana >= 15) { 
                             printf("You cast World Slash\n");
                             printf("It hits %s\n", enemy->name);
                             enemy->health -= 38;
-                            player->mana -= 15;
+                            player->mana -= 15; //mana cost
                         } else {
                             printf("Not enough mana to cast World Slash!\n");
                         }
@@ -143,7 +143,7 @@ void doCombat(struct Player *player, struct Enemy *enemy) {
 
             case 4:
                 printf("you try to ran away...");
-                if (rand() % 100 < 30) {
+                if (rand() % 100 < 30) { //30% of running away from enemy
                     printf("You successfully ran away!\n");
                     combat = 0;
                 } else {
@@ -152,10 +152,10 @@ void doCombat(struct Player *player, struct Enemy *enemy) {
                 break;
 
             case 5:
-                displayPlayerStats(player);
+                displayPlayerStats(player); //display player currnt stats in combat
                 break;
 
-            case 666:
+            case 666: 
                 delayPrint(".........\n");
                 delayPrint("Ryōiki Tenkai\n");
                 delayPrint("Fukuma Mizushi\n");
@@ -163,35 +163,35 @@ void doCombat(struct Player *player, struct Enemy *enemy) {
                 delayPrint("...\n");
                 enemy->health -= 999;
                 if (enemy->health <= 0) {
-                    printf("it seems %s already perished by your hands\n", enemy->name);
+                    printf("it seems the %s already perished by your hands\n", enemy->name);
                     combat = 0;
                 }
                 break;
         }
 
-        if (enemy->health > 0) {
+        if (enemy->health > 0) { //if the enemy health is zero
             enemyAttack(player, enemy);
 
             if (player->health <= 0) {
-                printf("You have been utterly defeated by %s. Take this L with you!\n", enemy->name);
-                combat = 0;
+                printf("You have been utterly defeated by the %s. Take this L with you!\n", enemy->name);
+                combat = 0; //end the combat loop
             }
         } else {
             printf("You defeated %s\n", enemy->name);
-            combat = 0;
+            combat = 0; //end the combat loop
         }
     }
 }
 
 int main() {
-    srand(time(0));
+    srand(time(0)); 
 
-    struct Player player = {"Player", 150, 65, 30, 50, 40, 45, 10};
-    struct Enemy enemy;
+    struct Player player = {"Player", 150, 65, 30, 50, 40, 45, 10}; //player stats
+    struct Enemy enemy; //enemy structure
 
     printf("Welcome to the game!\n");
 
-    int choice;
+    int choice; //lobby 
     do {
         printf("\n1. Explore\n");
         printf("2. View Character Stats\n");
@@ -203,7 +203,7 @@ int main() {
         switch (choice) {
             case 1:
                 {
-                    int randEnemy = rand() % 6;
+                    int randEnemy = rand() % 6; //enemy randomizer
 
                     switch (randEnemy) {
                         case 0:
@@ -220,7 +220,7 @@ int main() {
                             break;
                         case 3: 
                             enemy = (struct Enemy){"Skeleton King", 100, 65};
-                                                printf("kind of troubling this one\n");
+                            printf("kind of troubling this one\n");
                             break;
                         case 4:
                             enemy = (struct Enemy){"Elder God", 999, 999};
@@ -240,7 +240,7 @@ int main() {
                     break;
                 }
             case 2:
-                displayPlayerStats(&player);
+                displayPlayerStats(&player); //hence the name it will display the player stats
                 break;
 
             case 3:
@@ -250,7 +250,7 @@ int main() {
             default:
                 printf("Invalid choice. Please try again.\n");
         }
-    } while (choice != 3);
+    } while (choice != 3); //if choice 3 it will end the program
 
     return 0;
 }
