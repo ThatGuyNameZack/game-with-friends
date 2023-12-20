@@ -9,8 +9,6 @@ struct Player {
     int mana;
     int attack;
     int defense;
-    int slash;
-    int magic;
     int luck;
 };
 
@@ -37,7 +35,7 @@ void enemyAttack(struct Player *player, struct Enemy *enemy) {
     int luck = player->luck;
     int randomNum = rand() % 100; 
 
-    if (randomNum < (luck * 0.5)) {  //rng system for enemy
+    if (randomNum < (luck / 2)) {  //rng system for enemy
         int damage = enemy->attack - player->defense;
         if (damage > 0) {
             player->health -= damage;
@@ -186,7 +184,7 @@ void doCombat(struct Player *player, struct Enemy *enemy) {
 int main() {
     srand(time(0)); 
 
-    struct Player player = {"Player", 150, 65, 30, 50, 40, 45, 10}; //player stats
+    struct Player player = {"Player", 150, 65, 30, 50, 100}; //player stats
     struct Enemy enemy; //enemy structure
 
     printf("Welcome to the game!\n");
