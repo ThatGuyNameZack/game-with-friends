@@ -4,19 +4,20 @@
 #include <unistd.h>
 
 struct Player {
-    char name[50]; //int player, structure of the player
-    int health;
-    int mana;
-    int attack;
-    int defense;
+    char name[50]; //the players structure stats
+    float health; 
+    float mana;   
+    float attack; 
+    float defense; 
     int luck;
 };
 
-struct Enemy { 
-    char name[50];//structure of the enemy
-    int health;
-    int attack;
+struct Enemy {
+    char name[50]; //the enemy stats
+    float health; 
+    float attack; 
 };
+
 
 void delayPrint(const char *text) { //added for dramatic effects
     while (*text != '\0') {
@@ -52,16 +53,16 @@ void enemyAttack(struct Player *player, struct Enemy *enemy) {
 
 void displayEnemyStats(struct Enemy *enemy) {
     printf("\nEnemy Name: %s\n", enemy->name);
-    printf("Enemy Health: %d\n", enemy->health);
-    printf("Enemy Attack: %d\n", enemy->attack);
+    printf("Enemy Health: %f\n", enemy->health);
+    printf("Enemy Attack: %f\n", enemy->attack);
 }
 
 void displayPlayerStats(struct Player *player) {
     printf("Name: %s\n", player->name);
-    printf("Health: %d\n", player->health);
-    printf("Mana: %d\n", player->mana);
-    printf("Attack: %d\n", player->attack);
-    printf("Defense: %d\n", player->defense);
+    printf("Health: %f\n", player->health);
+    printf("Mana: %f\n", player->mana);
+    printf("Attack: %f\n", player->attack);
+    printf("Defense: %f\n", player->defense);
     printf("luck : %d\n", player->luck);
 }
 
