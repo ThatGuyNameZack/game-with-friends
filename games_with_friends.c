@@ -115,33 +115,33 @@ int main() {
                         case 0:
                             // Set stats for enemy type 1
                             enemy = (struct Enemy){"Goblin", 50, 15};
-                            printf("this might be easy");
+                            printf("this might be easy ");
                             break;
                         case 1:
                             // Set stats for enemy type 2
                             enemy = (struct Enemy){"Dragon", 250, 75};
-                            printf("this might be dangerous");
+                            printf("this might be dangerous ");
                             break;
                         case 2:
                             // Set stats for enemy type 3
                             enemy = (struct Enemy){"Skeleton", 30, 25};
-                            printf("pretty spooky huh");
+                            printf("pretty spooky huh ");
                             break;
                         case 3: 
                             enemy = (struct Enemy){"Skeleton King", 100, 50};
-                            printf("kind of troubling this one");
+                            printf("kind of troubling this one ");
                             break;
                         case 4:
                             enemy = (struct Enemy){"Elder God", 999, 999};
-                            printf("it seems we have already lost...");
+                            printf("it seems we have already lost... ");
                             break;
                         case 5:
                             enemy = (struct Enemy){"Slime", 10, 5};
-                            printf("pretty cute for being an enemy");
+                            printf("pretty cute for being an enemy ");
                             break;
                         case 6:
                             enemy = (struct Enemy){"Baby Dragon", 125, 32};
-                            printf("we could probably handle this one");
+                            printf("we could probably handle this one ");
                             break;
                     }
                     printf("You encountered a %s!\n", enemy.name);
